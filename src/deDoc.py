@@ -291,7 +291,7 @@ def deDoc(G,k):
 def optimal_graph_coding_tree(G):
     codetree = init_codetree(G)
     while True:
-        print("round:")
+        # print("round:")
         merge_delta_entropy = 0
         for alpha_nid in codetree.expand_tree(mode = 2):
             for beta_node in codetree.siblings(alpha_nid):
@@ -301,18 +301,18 @@ def optimal_graph_coding_tree(G):
                     if ent > merge_delta_entropy:
                         merge_delta_entropy = ent
                         merged_tree = Tree(mg_T.subtree(mg_T.root), deep=True)
-                        print("merge tree:")
-                        print("en:",merge_delta_entropy)
-                        merged_tree.show()
+                        # print("merge tree:")
+                        # print("en:",merge_delta_entropy)
+                        # merged_tree.show()
                 elif codetree.get_node(alpha_nid).is_leaf() and not beta_node.is_leaf():
                     mg_T = merge(codetree, beta_node.identifier, alpha_nid)
                     ent = merge_delta(G, codetree, mg_T, beta_node.identifier, alpha_nid)
                     if ent > merge_delta_entropy:
                         merge_delta_entropy = ent
                         merged_tree = Tree(mg_T.subtree(mg_T.root), deep=True)
-                        print("merge tree:")
-                        print("en:",merge_delta_entropy)
-                        merged_tree.show()
+                        # print("merge tree:")
+                        # print("en:",merge_delta_entropy)
+                        # merged_tree.show()
        
         combine_delta_entropy = 0
         for alpha_nid in codetree.expand_tree(nid = -1, mode = 2):
@@ -325,9 +325,9 @@ def optimal_graph_coding_tree(G):
                     if ent > combine_delta_entropy:
                         combine_delta_entropy = ent
                         combined_tree = Tree(cm_T.subtree(cm_T.root), deep=True)
-                        print("combine tree:")
-                        print("en:",combine_delta_entropy)
-                        combined_tree.show()
+                        # print("combine tree:")
+                        # print("en:",combine_delta_entropy)
+                        # combined_tree.show()
          
         if merge_delta_entropy > 0 and merge_delta_entropy > combine_delta_entropy:
             codetree = Tree(merged_tree.subtree(merged_tree.root), deep=True)
@@ -369,7 +369,7 @@ def optimal_structural_entropy(G):
 
 if __name__ == "__main__": 
     numpy.random.seed(int(time.time()))
-    n=numpy.random.randint(10,15)
+    n=numpy.random.randint(30,35)
     p=numpy.random.uniform(0.3,0.7)
 
     G=nx.fast_gnp_random_graph(n,p,int(time.time()))
